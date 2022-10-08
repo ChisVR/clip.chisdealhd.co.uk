@@ -11,8 +11,8 @@ export const Layout: FunctionComponent = ({ children }) => {
           rel="icon"
           href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💀</text></svg>"
         />
-        <meta name="twitter:creator" content="@chisdealhd" />
-        <meta name="twitter:site" content="@chisdealhd" />
+        <meta name="twitter:creator" content="@chisvroffical" />
+        <meta name="twitter:site" content="@chisvroffical" />
       </Head>
       <Header>
         <Brand className="image">
@@ -37,7 +37,7 @@ export const Layout: FunctionComponent = ({ children }) => {
       <Content>
         {children}
         <Footer>
-          Copyright &copy; 2019-{new Date().getFullYear()} - ChisdealHDAPP - All
+          Copyright &copy; 2019-{new Date().getFullYear()} - ChisVR - All
           Rights Reserved.
         </Footer>
       </Content>

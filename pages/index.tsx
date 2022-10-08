@@ -35,7 +35,7 @@ const ClipsPage: NextPage<Props> = ({ clips, lastUpdated, error }) => {
   return (
     <ClipsBody>
       <Head>
-        <title>clip.chisdealhd.co.uk - ChisdealHDYT's Medal TV Clips</title>
+        <title>clip.chisdealhd.co.uk - ChisVR's MedalTV / Twitch Clips</title>
       </Head>
       <Heading>
         <h1>Medal.tv Clips</h1>
@@ -43,7 +43,7 @@ const ClipsPage: NextPage<Props> = ({ clips, lastUpdated, error }) => {
       </Heading>
       <ClipsContainer>
         {clips.map((clip: Clip) => (
-          <Link href="/[clip]" as={`/${clip.contentId.replace("cid", "")}`}>
+          <Link href="/[clipmedal]" as={`/${clip.contentId.replace("cid", "")}`}>
             <a>
               <div className="clip" key={clip.contentId}>
                 <div className="meta">
