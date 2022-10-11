@@ -7,6 +7,7 @@ import { timeSince } from "../../lib/timeSince";
 import { ClipsBody, Heading } from "../../components/clips";
 import Link from "next/link";
 import Head from "next/head";
+import { useRouter } from 'next/router';
 
 interface Props {
   id?: string;
@@ -15,6 +16,7 @@ interface Props {
 }
 
 const ClipPage: NextPage<Props> = ({ id, clip, error }) => {
+  const { asPath, pathname } = useRouter();
   if (error) return <ErrorPage err={error} statusCode={500} />;
 
   return (
