@@ -1,10 +1,10 @@
 import { NextPage, NextPageContext } from "next";
-import { fetcher, host } from "../../lib/fetcher";
-import { Clip } from "../../interfaces/clips";
+import { fetcher, host } from "../../lib/fetchertwitch";
+import { Clip } from "../../interfaces/clipstwitch";
 import ErrorPage from "../_error";
 import styled from "styled-components";
 import { timeSince } from "../../lib/timeSince";
-import { ClipsBody, Heading } from "../../components/clips";
+import { ClipsBody, Heading } from "../../components/clipstwitch";
 import Link from "next/link";
 import Head from "next/head";
 import { useRouter } from 'next/router';
