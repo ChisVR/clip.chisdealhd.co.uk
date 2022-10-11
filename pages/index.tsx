@@ -43,7 +43,7 @@ const ClipsPage: NextPage<Props> = ({ clips, lastUpdated, error }) => {
       </Heading>
       <ClipsContainer>
         {clips.map((clip: Clip) => (
-          <Link href="/[clip]" as={`/${clip.contentId.replace("cid", "")}`}>
+          <Link href="/medaltv/[clip]" as={`/medaltv/${clip.contentId.replace("cid", "")}`}>
             <a>
               <div className="clip" key={clip.contentId}>
                 <div className="meta">
