@@ -16,7 +16,7 @@ interface Props {
 }
 
 const ClipPage: NextPage<Props> = ({ id, clip, error }) => {
-  const { asPath, pathname } = useRouter();
+  const router = useRouter();
   if (error) return <ErrorPage err={error} statusCode={500} />;
 
   return (
