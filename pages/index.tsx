@@ -5,7 +5,7 @@ import { rgba } from "polished";
 import Link from "next/link";
 import Head from "next/head";
 import { ClipsBody, Heading } from "../components/clips";
-import Button from '../components/Button';
+import Button from '@material-ui/core/Button'
 
 const ClipsPage: NextPage = () => {
   return (
