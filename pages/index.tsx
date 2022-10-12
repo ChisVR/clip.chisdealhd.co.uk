@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { rgba } from "polished";
 import Link from "next/link";
 import Head from "next/head";
-import { ClipsBody, Heading } from "../../components/clips";
+import { ClipsBody, Heading } from "../components/clips";
 
 const ClipsPage: NextPage = () => {
   return (
