@@ -54,48 +54,4 @@ const ClipsContainer = styled.div`
     text-decoration: none;
     color: ${(props) => props.theme.color};
   }
-
-  div.clip {
-    background: ${(props) => props.theme.darker};
-    margin: 10px;
-    display: flex;
-    flex-direction: column;
-    border-bottom: 1px solid ${(props) => props.theme.accent};
-    cursor: pointer;
-
-    &:hover {
-      background: ${(props) => props.theme.accent};
-      color: ${(props) => props.theme.darker};
-    }
-
-    p {
-      margin: 10px 6px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    div.meta {
-      position: relative;
-      display: flex;
-
-      img {
-        width: 100%;
-      }
-    }
-  }
-`;
-
-const ClipMeta = styled.div<{
-  horizontal: "left" | "right";
-  vertical: "top" | "bottom";
-}>`
-  position: absolute;
-  color: ${(props) => props.theme.color};
-  background: ${(props: any) => rgba(props.theme.darker, 0.75)};
-  padding: 0 10px;
-  font-size: 0.8rem;
-
-  ${(props) => props.horizontal}: 0;
-  ${(props) => props.vertical}: 0;
 `;
