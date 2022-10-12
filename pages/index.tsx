@@ -1,33 +1,9 @@
 import { NextPage } from "next";
-import { fetcher } from "../lib/fetcher";
-import { Clip } from "../interfaces/clips";
 import ErrorPage from "./_error";
 import styled from "styled-components";
-import { timeSince } from "../lib/timeSince";
 import { rgba } from "polished";
-import { ClipsBody, Heading } from "../components/clips";
 import Link from "next/link";
 import Head from "next/head";
-
-const clipsQuery = `
-query {
-  lastUpdated
-  clips {
-    contentId
-    directClipUrl
-    contentTitle
-    contentViews
-    contentThumbnail
-    createdTimestamp
-  }
-}
-`;
-
-interface Props {
-  clips?: Clip[];
-  lastUpdated?: string;
-  error?: string;
-}
 
 const ClipsPage: NextPage<Props> = ({ clips, lastUpdated, error }) => {
   if (error) return <ErrorPage err={error} statusCode={500} />;
@@ -35,29 +11,14 @@ const ClipsPage: NextPage<Props> = ({ clips, lastUpdated, error }) => {
   return (
     <ClipsBody>
       <Head>
-        <title>clip.chisdealhd.co.uk - ChisVR's MedalTV / Twitch Clips</title>
+        <title>Home - ChisVR's Clips</title>
       </Head>
       <Heading>
-        <h1>Medal.tv Clips</h1>
-        <p>Last Updated: {lastUpdated}</p>
+        <h1>Please Visit one of Urls Below</h1>
       </Heading>
       <ClipsContainer>
-        {clips.map((clip: Clip) => (
-          <Link href="/medaltv/[clip]" as={`/medaltv/${clip.contentId.replace("cid", "")}`}>
-            <a>
-              <div className="clip" key={clip.contentId}>
-                <div className="meta">
-                  <img src={clip.contentThumbnail} />
-                  <ClipMeta horizontal="right" vertical="top">
-                    {timeSince(clip.createdTimestamp * 1000)}
-                  </ClipMeta>
-                  <ClipMeta horizontal="right" vertical="bottom">
-                    {clip.contentViews} views
-                  </ClipMeta>
-                </div>
-                <p>{clip.contentTitle}</p>
-              </div>
-            </a>
+          <Link href="/medaltv/">
+            <Button variant="contained" color="secondary">MedalTV Clips</Button>
           </Link>
         ))}
       </ClipsContainer>
@@ -65,21 +26,6 @@ const ClipsPage: NextPage<Props> = ({ clips, lastUpdated, error }) => {
   );
 };
 
-ClipsPage.getInitialProps = async () => {
-  try {
-    const { data, errors } = await fetcher(clipsQuery).then((data) =>
-      data.json()
-    );
-
-    return {
-      clips: data?.clips,
-      lastUpdated: data?.lastUpdated ? timeSince(data.lastUpdated) : null,
-      error: errors && errors[0]?.message,
-    };
-  } catch (e) {
-    return { error: "Failed to load clips" };
-  }
-};
 
 export default ClipsPage;
 
