@@ -22,7 +22,6 @@ const ClipsPage: NextPage = () => {
               <Button variant="contained" color="secondary">MedalTV Clips</Button>
             </a>
           </Link>
-        ))}
       </ClipsContainer>
     </ClipsBody>
   );
