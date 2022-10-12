@@ -5,9 +5,7 @@ import { rgba } from "polished";
 import Link from "next/link";
 import Head from "next/head";
 
-const ClipsPage: NextPage = ({ error }) => {
-  if (error) return <ErrorPage err={error} statusCode={500} />;
-
+const ClipsPage: NextPage = () => {
   return (
     <ClipsBody>
       <Head>
