@@ -18,7 +18,9 @@ const ClipsPage: NextPage = () => {
       </Heading>
       <ClipsContainer>
           <Link href="/medaltv/">
-            <Button variant="contained" color="secondary">MedalTV Clips</Button>
+            <a>
+              <Button variant="contained" color="secondary">MedalTV Clips</Button>
+            </a>
           </Link>
         ))}
       </ClipsContainer>
