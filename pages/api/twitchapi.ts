@@ -40,7 +40,7 @@ async function getOauth() {
 
     let data = await response.json();
     window.localStorage.setItem("oauth", data.access_token);
-    this.oauth = data.access_token;
+    oauth = data.access_token;
 }
 
 async function twitchRequest(query) {
@@ -99,8 +99,8 @@ const updateClips = async (): Promise<void> => {
     (new Date().getTime() - lastUpdated.getTime()) / 1000 < 600
   )
     return;
-
-  var broadcasterId = local.broadcasterId;
+    let local = JSON.parse(window.localStorage.getItem("user"));
+    var broadcasterId = local.broadcasterId;
   
   const data: Clips = await this.twitchRequest(
              `clips?broadcaster_id=${
