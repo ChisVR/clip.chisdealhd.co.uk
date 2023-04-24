@@ -11,7 +11,7 @@ const ClipsPage: NextPage = () => {
   return (
     <ClipsBody>
       <Head>
-        <title>Home - ChisVR's Clips</title>
+        <title>Home - NekoSuneVR's Clips</title>
       </Head>
       <Heading>
         <h1>Please Visit one of Urls Below</h1>
