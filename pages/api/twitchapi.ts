@@ -4,97 +4,37 @@ import { Clips, Clip } from "../../interfaces/clipstwitch";
 
 const typeDefs = gql`
   type Query {
-    clip(id: String): Clip
+    clip(contentId: String): Clip
     clips: [Clip]
     lastUpdated: Date
   }
   scalar Date
   type Clip {
-    id: string;
-    title: string;
-    view_count: number;
-    created_at: string;
-    thumbnail_url: string;
+    contentId: String
+    contentTitle: String
+    contentViews: Int
+    contentThumbnail: String
+    createdTimestamp: Int
+    directClipUrl: String
   }
 `;
 
 let clips: Clip[] = [];
 let lastUpdated = null;
 
-var clientid = process.env.Twitch_ClientID;
-var clientsecrate = process.env.Twitch_ClientSecrate;
-var username = process.env.Twitch_Username;
-var oauth;
-let broadcasterId;
+const data: Clips = await fetch(
+    `https://api.nekosunevr.co.uk/v3/social/api/twitch/clips/nekosunevr/1000`,
+    {
+      headers: {
+        Content-Type: "application/json",
+        nekosunevr-api-key: process.env.NEKOSUNEAPIKEY,
+      },
+    }
+  ).then((data) => data.json());
 
-function convertToTimestamp(isoDateString) {
-  const date = new Date(isoDateString);
-  const timestamp = date.getTime();
-  return timestamp;
-}
-
-async function getOauth() {
-    let response = await fetch(
-       `https://id.twitch.tv/oauth2/token?client_id=${clientid}&client_secret=${clientsecrate}&grant_type=client_credentials`,
-       { method: "POST" }
-    );
-
-    let data = await response.json();
-    window.localStorage.setItem("oauth", data.access_token);
-    oauth = data.access_token;
-}
-
-async function twitchRequest(query) {
-                    let response = await fetch(
-                        `https://api.twitch.tv/helix/${query}`,
-                        {
-                            headers: {
-                                "Client-ID": clientid,
-                                Authorization: `Bearer ${oauth}`,
-                            },
-                        }
-                    );
-
-                    switch (response.status) {
-                        case 200:
-                            return await response.json();
-                            break;
-                        case 401:
-                            await getOauth();
-                            return await twitchRequest(query);
-                            break;
-                    }
-                }
-async function getUserId() {
-
-                        try {
-                            let data = await this.twitchRequest(
-                                `users?login=${username}`
-                            );
-                            broadcasterId = data.data[0].id;
-                        } catch (error) {
-                            console.log(
-                                "Got an error requesting userid:",
-                                error
-                            );
-                        }
-                }
-const updateClips = async (): Promise<void> => {
-  if (
-    lastUpdated !== null &&
-    (new Date().getTime() - lastUpdated.getTime()) / 1000 < 600
-  )
-    return;
-  
-  const data: Clips = await twitchRequest(
-             `clips?broadcaster_id=${
-                 broadcasterId
-               }&first=100`
-          ).then((data) => data.json());
-
-  clips = data.data.map((clip: Clip) => ({
+  clips = data.contentObjects.map((clip: Clip) => ({
     ...clip,
-    createdTimestamp: convertToTimestamp(clip.created_at) / 1000,
+    createdTimestamp: clip.createdTimestamp / 1000,
   }));
   lastUpdated = new Date();
 };
@@ -107,15 +47,16 @@ const resolvers = {
       await updateClips();
       return clips;
     },
-    async clip(_: any, { id }: { id: string }): Promise<Clip> {
+    async clip(_: any, { contentId }: { contentId: string }): Promise<Clip> {
       await updateClips();
-      return clips.filter((clip) => clip.id === id)[0];
+      return clips.filter((clip) => clip.contentId === contentId)[0];
     },
     async lastUpdated(): Promise<string | null> {
       return lastUpdated || new Date();
     },
   },
 };
+
 
 export const config = {
   api: {
