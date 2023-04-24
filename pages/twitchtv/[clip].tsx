@@ -34,7 +34,7 @@ const ClipPage: NextPage<Props> = ({ id, clip, error }) => {
     <ClipsBody>
       <Head>
         <title>
-          {clip.contentTitle} - clip.nekosunevr.co.uk - NekoSuneVR's MedalTV Clips
+          {clip.title} - clip.nekosunevr.co.uk - NekoSuneVR's MedalTV Clips
         </title>
         <meta name="twitter:card" content="photo" />
         <meta name="twitter:title" content={clip.title} />
@@ -59,7 +59,7 @@ const ClipPage: NextPage<Props> = ({ id, clip, error }) => {
           <Link href="/">
             <a>⬅</a>
           </Link>
-          {clip.contentTitle}
+          {clip.title}
         </h1>
         <p>Published: {timeSince(convertToTimestamp(clip.created_at) * 1000)}</p>
       </Heading>
