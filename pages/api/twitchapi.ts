@@ -12,7 +12,7 @@ const typeDefs = gql`
   type Clip {
     contentId: String
     contentTitle: String
-    contentViews: String
+    contentViews: Int
     contentThumbnail: String
     createdTimestamp: Int
     directClipUrl: String
