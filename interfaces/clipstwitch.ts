@@ -3,9 +3,10 @@ export interface Clips {
 }
 
 export interface Clip {
-  id: string;
-  title: string;
-  view_count: number;
-  created_at: string;
-  thumbnail_url: string;
+  contentId: string;
+  contentTitle: string;
+  contentViews: number;
+  contentThumbnail: string;
+  createdTimestamp: number;
+  directClipUrl: string;
 }
