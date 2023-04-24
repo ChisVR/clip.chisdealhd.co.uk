@@ -37,7 +37,7 @@ const ClipsPage: NextPage<Props> = ({ clips, lastUpdated, error }) => {
   return (
     <ClipsBody>
       <Head>
-        <title>clip.chisdealhd.co.uk - ChisVR's MedalTV / Twitch Clips</title>
+        <title>clip.nekosunevr.co.uk - ChisVR's MedalTV / Twitch Clips</title>
       </Head>
       <Heading>
         <h1>Medal.tv Clips</h1>
