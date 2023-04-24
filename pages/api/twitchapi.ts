@@ -32,7 +32,6 @@ const updateClips = async (): Promise<void> => {
     `https://api.nekosunevr.co.uk/v3/social/api/twitch/clips/nekosunevr/100`,
     {
       headers: {
-        'Content-Type': "application/json",
         'nekosunevr-api-key': process.env.NEKOSUNEAPIKEY,
       },
     }
