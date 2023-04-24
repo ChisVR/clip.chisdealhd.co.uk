@@ -29,7 +29,7 @@ const updateClips = async (): Promise<void> => {
   )
     return;
   const data: Clips = await fetch(
-    `https://api.nekosunevr.co.uk/v3/social/api/twitch/clips/nekosunevr/1000`,
+    `https://api.nekosunevr.co.uk/v3/social/api/twitch/clips/nekosunevr/100`,
     {
       headers: {
         'Content-Type': "application/json",
