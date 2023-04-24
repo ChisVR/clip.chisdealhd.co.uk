@@ -23,7 +23,7 @@ const ClipPage: NextPage<Props> = ({ id, clip, error }) => {
     <ClipsBody>
       <Head>
         <title>
-          {clip.contentTitle} - clip.chisdealhd.co.uk - ChisVR's MedalTV Clips
+          {clip.contentTitle} - clip.nekosunevr.co.uk - NekoSuneVR's MedalTV Clips
         </title>
         <meta name="twitter:card" content="photo" />
         <meta name="twitter:title" content={clip.contentTitle} />
@@ -35,7 +35,7 @@ const ClipPage: NextPage<Props> = ({ id, clip, error }) => {
         <meta property="og:image" content={clip.contentThumbnail} />
         <meta
           property="og:site_name"
-          content="ChisVR - Streamer / Developer"
+          content="NekoSuneVR - Streamer / Developer"
         />
         <meta property="og:description" content={clip.contentTitle} />
 
