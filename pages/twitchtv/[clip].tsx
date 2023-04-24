@@ -50,7 +50,7 @@ const ClipPage: NextPage<Props> = ({ id, clip, error }) => {
           </Link>
           {clip.contentTitle}
         </h1>
-        <p>Published: {timeSince(clip.createdTimestamp * 1000)}</p>
+        <!-- <p>Published: {timeSince(clip.createdTimestamp * 1000)}</p> -->
       </Heading>
       <VideoContainer>
         <VideoPlayer src={clip.directClipUrl} />
@@ -69,7 +69,6 @@ ClipPage.getInitialProps = async ({ query }: NextPageContext) => {
           directClipUrl
           contentTitle
           contentThumbnail
-          createdTimestamp
         }
       }
     `).then((data) => data.json());
