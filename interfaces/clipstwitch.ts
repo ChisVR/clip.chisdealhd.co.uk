@@ -5,7 +5,7 @@ export interface Clips {
 export interface Clip {
   contentId: string;
   contentTitle: string;
-  contentViews: string;
+  contentViews: number;
   contentThumbnail: string;
   createdTimestamp: number;
   directClipUrl: string;
