@@ -50,7 +50,6 @@ const ClipPage: NextPage<Props> = ({ id, clip, error }) => {
           </Link>
           {clip.contentTitle}
         </h1>
-        <!-- <p>Published: {timeSince(clip.createdTimestamp * 1000)}</p> -->
       </Heading>
       <VideoContainer>
         <VideoPlayer src={clip.directClipUrl} />
