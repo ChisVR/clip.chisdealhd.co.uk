@@ -108,7 +108,7 @@ const updateClips = async (): Promise<void> => {
                }&first=100`
           ).then((data) => data.json());
 
-  clips = data.data.map((clip: Clip) => ({
+  clips = data.map((clip: Clip) => ({
     ...clip,
     createdTimestamp: convertToTimestamp(clip.created_at) / 1000,
   }));
