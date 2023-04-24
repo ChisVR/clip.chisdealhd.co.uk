@@ -22,7 +22,13 @@ const typeDefs = gql`
 let clips: Clip[] = [];
 let lastUpdated = null;
 
-const data: Clips = await fetch(
+const updateClips = async (): Promise<void> => {
+  if (
+    lastUpdated !== null &&
+    (new Date().getTime() - lastUpdated.getTime()) / 1000 < 600
+  )
+    return;
+  const data: Clips = await fetch(
     `https://api.nekosunevr.co.uk/v3/social/api/twitch/clips/nekosunevr/1000`,
     {
       headers: {
