@@ -1,5 +1,5 @@
 export interface Clips {
-  data: Clip[];
+  contentObjects: Clip[];
 }
 
 export interface Clip {
