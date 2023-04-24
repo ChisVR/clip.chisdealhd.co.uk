@@ -11,8 +11,8 @@ export const Layout: FunctionComponent = ({ children }) => {
           rel="icon"
           href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💀</text></svg>"
         />
-        <meta name="twitter:creator" content="@chisvroffical" />
-        <meta name="twitter:site" content="@chisvroffical" />
+        <meta name="twitter:creator" content="@nekosunevr" />
+        <meta name="twitter:site" content="@nekosunevr" />
       </Head>
       <Header>
         <Brand className="image">
@@ -29,8 +29,8 @@ export const Layout: FunctionComponent = ({ children }) => {
           <Button href="https://medal.tv/users/6336393" target="_blank">
             <button>Go to medal.tv</button>
           </Button>
-          <Button href="https://chisdealhd.co.uk">
-            <button className="accent">Go to chisdealhd.co.uk</button>
+          <Button href="https://nekosunevr.co.uk">
+            <button className="accent">Go to nekosunevr.co.uk</button>
           </Button>
         </Nav>
       </Header>
