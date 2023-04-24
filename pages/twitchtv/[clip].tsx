@@ -48,7 +48,7 @@ const ClipPage: NextPage<Props> = ({ id, clip, error }) => {
           <Link href="/">
             <a>⬅</a>
           </Link>
-          {clip.title}
+          {clip.contentTitle}
         </h1>
         <p>Published: {timeSince(clip.createdTimestamp * 1000)}</p>
       </Heading>
