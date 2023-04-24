@@ -14,7 +14,7 @@ const typeDefs = gql`
     contentTitle: String
     contentViews: String
     contentThumbnail: String
-    createdTimestamp: Number
+    createdTimestamp: Int
     directClipUrl: String
   }
 `;
