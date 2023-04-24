@@ -52,7 +52,7 @@ const ClipPage: NextPage<Props> = ({ id, clip, error }) => {
         </h1>
       </Heading>
       <VideoContainer>
-        <VideoPlayer src={clip.directClipUrl} />
+        <VideoPlayer src={clip.directClipUrl}&parent=clip.nekosunevr.co.uk />
       </VideoContainer>
     </ClipsBody>
   );
