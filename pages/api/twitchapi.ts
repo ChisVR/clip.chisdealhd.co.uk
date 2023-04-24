@@ -24,7 +24,8 @@ let lastUpdated = null;
 var clientid = process.env.Twitch_ClientID;
 var clientsecrate = process.env.Twitch_ClientSecrate;
 var username = process.env.Twitch_Username;
-var oauth = window.localStorage.getItem("oauth");
+var oauth;
+let broadcasterId;
 
 function convertToTimestamp(isoDateString) {
   const date = new Date(isoDateString);
@@ -60,38 +61,23 @@ async function twitchRequest(query) {
                             break;
                         case 401:
                             await getOauth();
-                            return await this.twitchRequest(query);
+                            return await twitchRequest(query);
                             break;
                     }
                 }
 async function getUserId() {
-  let broadcasterId;
-                    let local = JSON.parse(window.localStorage.getItem("user"));
-                    if (local != null && local.username == username) {
-                        broadcasterId = local.broadcasterId;
-                    } else {
-                        localStorage.clear();
 
                         try {
                             let data = await this.twitchRequest(
                                 `users?login=${username}`
                             );
                             broadcasterId = data.data[0].id;
-
-                            window.localStorage.setItem(
-                                "user",
-                                JSON.stringify({
-                                    broadcasterId: broadcasterId,
-                                    username: username,
-                                })
-                            );
                         } catch (error) {
                             console.log(
                                 "Got an error requesting userid:",
                                 error
                             );
                         }
-                    }
                 }
 const updateClips = async (): Promise<void> => {
   if (
@@ -99,8 +85,6 @@ const updateClips = async (): Promise<void> => {
     (new Date().getTime() - lastUpdated.getTime()) / 1000 < 600
   )
     return;
-    let local = JSON.parse(window.localStorage.getItem("user"));
-    var broadcasterId = local.broadcasterId;
   
   const data: Clips = await twitchRequest(
              `clips?broadcaster_id=${
