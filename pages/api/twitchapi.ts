@@ -102,7 +102,7 @@ const updateClips = async (): Promise<void> => {
     let local = JSON.parse(window.localStorage.getItem("user"));
     var broadcasterId = local.broadcasterId;
   
-  const data: Clips = await this.twitchRequest(
+  const data: Clips = await twitchRequest(
              `clips?broadcaster_id=${
                  broadcasterId
                }&first=100`
