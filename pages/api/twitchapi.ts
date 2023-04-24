@@ -32,7 +32,7 @@ function convertToTimestamp(isoDateString) {
   return timestamp;
 }
 
-async getOauth() {
+async function getOauth() {
     let response = await fetch(
        `https://id.twitch.tv/oauth2/token?client_id=${clientid}&client_secret=${clientsecrate}&grant_type=client_credentials`,
        { method: "POST" }
@@ -43,7 +43,7 @@ async getOauth() {
     this.oauth = data.access_token;
 }
 
-async twitchRequest(query) {
+async function twitchRequest(query) {
                     let response = await fetch(
                         `https://api.twitch.tv/helix/${query}`,
                         {
@@ -64,7 +64,7 @@ async twitchRequest(query) {
                             break;
                     }
                 }
-async getUserId() {
+async function getUserId() {
   let broadcasterId;
                     let local = JSON.parse(window.localStorage.getItem("user"));
                     if (local != null && local.username == username) {
