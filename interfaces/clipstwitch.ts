@@ -7,6 +7,6 @@ export interface Clip {
   contentTitle: string;
   contentViews: string;
   contentThumbnail: string;
-  createdTimestamp: string;
+  createdTimestamp: number;
   directClipUrl: string;
 }
