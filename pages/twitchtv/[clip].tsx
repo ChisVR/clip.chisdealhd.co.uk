@@ -14,17 +14,6 @@ interface Props {
   clip?: Clip;
   error?: string;
 }
-  
-function convertToMp4(str) {
-  const newStr = str.replace("-preview-480x272.jpg", ".mp4");
-  return newStr;
-}
-  
-function convertToTimestamp(isoDateString) {
-  const date = new Date(isoDateString);
-  const timestamp = date.getTime();
-  return timestamp;
-}
 
 const ClipPage: NextPage<Props> = ({ id, clip, error }) => {
   const router = useRouter();
@@ -34,25 +23,25 @@ const ClipPage: NextPage<Props> = ({ id, clip, error }) => {
     <ClipsBody>
       <Head>
         <title>
-          {clip.title} - clip.nekosunevr.co.uk - NekoSuneVR's MedalTV Clips
+          {clip.contentTitle} - clip.nekosunevr.co.uk - NekoSuneVR's MedalTV Clips
         </title>
         <meta name="twitter:card" content="photo" />
-        <meta name="twitter:title" content={clip.title} />
-        <meta name="twitter:image" content={clip.thumbnail_url} />
+        <meta name="twitter:title" content={clip.contentTitle} />
+        <meta name="twitter:image" content={clip.contentThumbnail} />
         <meta name="twitter:url" content={`${host}/${id}`} />
 
-        <meta property="og:title" content={clip.title} />
+        <meta property="og:title" content={clip.contentTitle} />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content={clip.thumbnail_url} />
+        <meta property="og:image" content={clip.contentThumbnail} />
         <meta
           property="og:site_name"
           content="NekoSuneVR - Streamer / Developer"
         />
-        <meta property="og:description" content={clip.title} />
+        <meta property="og:description" content={clip.contentTitle} />
 
-        <meta itemProp="name" content={clip.title} />
-        <meta itemProp="description" content={clip.title} />
-        <meta itemProp="image" content={clip.thumbnail_url} />
+        <meta itemProp="name" content={clip.contentTitle} />
+        <meta itemProp="description" content={clip.contentTitle} />
+        <meta itemProp="image" content={clip.contentThumbnail} />
       </Head>
       <Heading>
         <h1>
@@ -61,10 +50,10 @@ const ClipPage: NextPage<Props> = ({ id, clip, error }) => {
           </Link>
           {clip.title}
         </h1>
-        <p>Published: {timeSince(convertToTimestamp(clip.created_at) * 1000)}</p>
+        <p>Published: {timeSince(clip.createdTimestamp * 1000)}</p>
       </Heading>
       <VideoContainer>
-        <VideoPlayer src={convertToMp4(clip.thumbnail_url)} />
+        <VideoPlayer src={clip.directClipUrl} />
       </VideoContainer>
     </ClipsBody>
   );
@@ -76,10 +65,11 @@ ClipPage.getInitialProps = async ({ query }: NextPageContext) => {
   try {
     const { data, errors } = await fetcher(`
       query {
-        clip(id: "${id}") {
-          title
-          thumbnail_url
-          created_at
+        clip(contentId: "${id}") {
+          directClipUrl
+          contentTitle
+          contentThumbnail
+          createdTimestamp
         }
       }
     `).then((data) => data.json());
