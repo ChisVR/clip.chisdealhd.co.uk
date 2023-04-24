@@ -1,6 +1,5 @@
 import { AppProps } from "next/app";
 import React, { FunctionComponent } from "react";
-import { Analytics } from '@vercel/analytics/react';
 
 import { Layout } from "../components/layout";
 
@@ -23,7 +22,6 @@ const App: FunctionComponent<AppProps> = ({ Component, pageProps }) => {
     <ThemeProvider theme={theme}>
       <Layout>
         <Component {...pageProps} />
-        <Analytics />
       </Layout>
     </ThemeProvider>
   );
