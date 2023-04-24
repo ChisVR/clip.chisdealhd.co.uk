@@ -22,6 +22,11 @@ const ClipsPage: NextPage = () => {
               <Button variant="contained" color="secondary">MedalTV Clips</Button>
             </a>
           </Link>
+          <Link href="/twitchtv/">
+            <a>
+              <Button variant="contained" color="secondary">TwitchTV Clips</Button>
+            </a>
+          </Link>
       </ClipsContainer>
     </ClipsBody>
   );
