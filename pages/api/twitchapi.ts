@@ -26,8 +26,8 @@ const data: Clips = await fetch(
     `https://api.nekosunevr.co.uk/v3/social/api/twitch/clips/nekosunevr/1000`,
     {
       headers: {
-        ContentType: "application/json",
-        nekosunevr-api-key: process.env.NEKOSUNEAPIKEY,
+        'Content-Type': "application/json",
+        'nekosunevr-api-key': process.env.NEKOSUNEAPIKEY,
       },
     }
   ).then((data) => data.json());
