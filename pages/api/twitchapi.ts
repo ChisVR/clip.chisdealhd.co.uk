@@ -4,32 +4,95 @@ import { Clips, Clip } from "../../interfaces/clipstwitch";
 
 const typeDefs = gql`
   type Query {
-    clip(contentId: String): Clip
+    clip(id: String): Clip
     clips: [Clip]
     lastUpdated: Date
   }
   scalar Date
   type Clip {
-    contentId: String
-    rawFileUrl: String
-    rawFileUrlLowRes: String
-    unbrandedFileUrl: String
-    contentTitle: String
-    contentViews: Int
-    contentLikes: Int
-    contentThumbnail: String
-    categoryId: Int
-    videoLengthSeconds: Int
-    createdTimestamp: Int
-    directClipUrl: String
-    embedIframeCode: String
-    credits: String
+    id: string;
+    title: string;
+    view_count: number;
+    created_at: string;
+    thumbnail_url: string;
   }
 `;
 
 let clips: Clip[] = [];
 let lastUpdated = null;
 
+var clientid = process.env.Twitch_ClientID;
+var clientsecrate = process.env.Twitch_ClientSecrate;
+var username = process.env.Twitch_Username;
+var oauth = window.localStorage.getItem("oauth");
+
+function convertToTimestamp(isoDateString) {
+  const date = new Date(isoDateString);
+  const timestamp = date.getTime();
+  return timestamp;
+}
+
+async getOauth() {
+    let response = await fetch(
+       `https://id.twitch.tv/oauth2/token?client_id=${clientid}&client_secret=${clientsecrate}&grant_type=client_credentials`,
+       { method: "POST" }
+    );
+
+    let data = await response.json();
+    window.localStorage.setItem("oauth", data.access_token);
+    this.oauth = data.access_token;
+}
+
+async twitchRequest(query) {
+                    let response = await fetch(
+                        `https://api.twitch.tv/helix/${query}`,
+                        {
+                            headers: {
+                                "Client-ID": clientid,
+                                Authorization: `Bearer ${oauth}`,
+                            },
+                        }
+                    );
+
+                    switch (response.status) {
+                        case 200:
+                            return await response.json();
+                            break;
+                        case 401:
+                            await getOauth();
+                            return await this.twitchRequest(query);
+                            break;
+                    }
+                }
+async getUserId() {
+  let broadcasterId;
+                    let local = JSON.parse(window.localStorage.getItem("user"));
+                    if (local != null && local.username == username) {
+                        broadcasterId = local.broadcasterId;
+                    } else {
+                        localStorage.clear();
+
+                        try {
+                            let data = await this.twitchRequest(
+                                `users?login=${username}`
+                            );
+                            broadcasterId = data.data[0].id;
+
+                            window.localStorage.setItem(
+                                "user",
+                                JSON.stringify({
+                                    broadcasterId: broadcasterId,
+                                    username: username,
+                                })
+                            );
+                        } catch (error) {
+                            console.log(
+                                "Got an error requesting userid:",
+                                error
+                            );
+                        }
+                    }
+                }
 const updateClips = async (): Promise<void> => {
   if (
     lastUpdated !== null &&
@@ -37,18 +100,17 @@ const updateClips = async (): Promise<void> => {
   )
     return;
 
-  const data: Clips = await fetch(
-    `https://developers.medal.tv/v1/latest?userId=6336393&limit=1000&offset=0`,
-    {
-      headers: {
-        Authorization: "4851a20e-40ec-4dad-b3b3-33ceb79b603f",
-      },
-    }
-  ).then((data) => data.json());
+  var broadcasterId = local.broadcasterId;
+  
+  const data: Clips = await this.twitchRequest(
+             `clips?broadcaster_id=${
+                 broadcasterId
+               }&first=100`
+          ).then((data) => data.json());
 
-  clips = data.contentObjects.map((clip: Clip) => ({
+  clips = data.data.map((clip: Clip) => ({
     ...clip,
-    createdTimestamp: clip.createdTimestamp / 1000,
+    createdTimestamp: convertToTimestamp(clip.created_at) / 1000,
   }));
   lastUpdated = new Date();
 };
@@ -61,9 +123,9 @@ const resolvers = {
       await updateClips();
       return clips;
     },
-    async clip(_: any, { contentId }: { contentId: string }): Promise<Clip> {
+    async clip(_: any, { id }: { id: string }): Promise<Clip> {
       await updateClips();
-      return clips.filter((clip) => clip.contentId === contentId)[0];
+      return clips.filter((clip) => clip.id === id)[0];
     },
     async lastUpdated(): Promise<string | null> {
       return lastUpdated || new Date();
