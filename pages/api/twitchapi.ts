@@ -12,9 +12,9 @@ const typeDefs = gql`
   type Clip {
     contentId: String
     contentTitle: String
-    contentViews: Int
+    contentViews: String
     contentThumbnail: String
-    createdTimestamp: Int
+    createdTimestamp: String
     directClipUrl: String
   }
 `;
