@@ -1,8 +1,8 @@
-import { ApolloServer } from "@apollo/server";
+import { ApolloServer, gql } from "apollo-server-micro";
 import "isomorphic-fetch";
 import { Clips, Clip } from "../../interfaces/clipstwitch";
 
-const typeDefs = `#graphql
+const typeDefs = gql`
   type Query {
     clip(contentId: String): Clip
     clips: [Clip]
