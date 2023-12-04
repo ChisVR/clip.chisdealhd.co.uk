@@ -1,9 +1,13 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, ReactNode } from "react";
 import styled from "styled-components";
 import Link from "next/link";
 import Head from "next/head";
 
-export const Layout: FunctionComponent = ({ children }) => {
+interface BaseLayoutProps {
+  children?: ReactNode;
+}
+
+export const Layout: FunctionComponent<BaseLayoutProps> = ({ children }) => {
   return (
     <Body>
       <Head>

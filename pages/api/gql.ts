@@ -82,5 +82,4 @@ export const config = {
 export default new ApolloServer({
   typeDefs,
   resolvers,
-  playground: false,
 }).createHandler({ path: "/api/gql" });
