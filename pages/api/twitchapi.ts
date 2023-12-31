@@ -28,6 +28,7 @@ const updateClips = async (): Promise<void> => {
     (new Date().getTime() - lastUpdated.getTime()) / 1000 < 600
   )
     return;
+  
   const data: Clips = await fetch(
     `https://api.nekosunevr.co.uk/v4/social/api/twitch/ownerclips/list`,
     {
