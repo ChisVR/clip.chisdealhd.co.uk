@@ -29,7 +29,7 @@ const updateClips = async (): Promise<void> => {
   )
     return;
   const data: Clips = await fetch(
-    `https://api.nekosunevr.co.uk/v4/social/api/twitch/clips/nekosunevr/100`,
+    `https://api.nekosunevr.co.uk/v4/social/api/twitch/ownerclips/list`,
     {
       headers: {
         'nekosunevr-api-key': process.env.NEKOSUNEAPIKEY,
