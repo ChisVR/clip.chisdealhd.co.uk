@@ -39,7 +39,7 @@ const updateClips = async (): Promise<void> => {
 
   clips = data.contentObjects.map((clip: Clip) => ({
     ...clip,
-    createdTimestamp: Math.floor(clip.createdTimestamp / 1000),
+    createdTimestamp: Math.floor(clip.createdTimestamp),
   }));
   lastUpdated = new Date();
 };
