@@ -51,7 +51,7 @@ const ClipsPage: NextPage<Props> = ({ clips, lastUpdated, error }) => {
                 <div className="meta">
                   <img src={clip.contentThumbnail} />
                   <ClipMeta horizontal="right" vertical="top">
-                    
+                    {timeSince(clip.createdTimestamp * 1000)}
                   </ClipMeta>
                   <ClipMeta horizontal="right" vertical="bottom">
                     {clip.contentViews} views
