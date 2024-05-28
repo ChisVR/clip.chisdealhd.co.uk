@@ -40,7 +40,7 @@ const updateClips = async (): Promise<void> => {
     return;
 
   const data: Clips = await fetch(
-    `https://developers.medal.tv/v1/latest?userId=6336393&limit=1000&offset=0`,
+    `https://developers.medal.tv/v1/latest?userId=6336393&limit=60&offset=0`,
     {
       headers: {
         Authorization: "4851a20e-40ec-4dad-b3b3-33ceb79b603f",
